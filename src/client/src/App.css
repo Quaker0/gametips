@@ -31,7 +31,7 @@ a:hover {
 p {
   padding: 100;
   margin: 100;
-  width: 50%;
+  width: 80%;
   display: inline-table;
   align-items: center;
   justify-content: center;
@@ -40,6 +40,62 @@ p {
 
 .App-link {
   color: #61dafb;
+}
+
+.rating-score {
+    color: black;
+    font-weight: bold;
+}
+
+.side {
+  width: 20%;
+  float: left;
+}
+
+.container {
+  width: 60%;
+  float: left;
+}
+
+.inner-container {
+  width: 80%;
+  float: center;
+}
+
+.article {
+  text-align: center;
+}
+
+.hexagon {
+  float: right;
+  text-align: center;
+  position: relative;
+  width: 60px;
+  height: 34.642px;
+  background-color: #64C7CC;
+  margin: 30px auto;
+  right: 100px;
+}
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+}
+.hexagon:before {
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  border-bottom: 17.32px solid #64C7CC;
+}
+.hexagon:after {
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 0;
+  border-top: 17.32px solid #64C7CC;
 }
 
 @keyframes App-logo-spin {

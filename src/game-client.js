@@ -12,7 +12,7 @@ const authorizedRequest = request.defaults({
 
 exports.getGame = function(id) {
   const fields = [
-    'id', 'name', 'summary'
+    'id', 'name', 'summary', 'total_rating'
     // 'platforms', 'first_release_date', 'franchise'
   ];
   const req = {
@@ -24,7 +24,7 @@ exports.getGame = function(id) {
 
 exports.listGames = function() {
   const fields = [
-    'id', 'name', 'total_rating', 'screenshots'
+    'id', 'name'
     // 'platforms', 'first_release_date', 'franchise'
   ];
   const req = {
@@ -40,7 +40,6 @@ function prepareRequest(req) {
   return (resolve, reject) => {
     authorizedRequest.get(req, function(err,httpResponse,body) {
       if (!err && httpResponse.statusCode === 200) {
-        console.log('Success')
         resolve(JSON.parse(body));
       } else {
         if (httpResponse.statusCode === 401) {

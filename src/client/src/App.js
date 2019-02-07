@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Game from './GameView.js';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const Main = () => (
@@ -45,36 +46,6 @@ class Home extends Component {
       </div>
     );
   }
-}
-
-
-class Game extends Component {
-  state = { game: {} };
-
-  constructor(props) {
-    super(props)
-    this.gameId = this.props.match.params.id;
-  }
-
-  componentDidMount() {
-    fetch('/api/v1/getGame/' + this.gameId)
-      .then(res => res.json())
-     .then(gameItem => this.setState({ game: gameItem }));
- }
-
- render() {
-   const { game } = this.state;
-   console.log(game);
-   return (
-     <div className="App">
-       <div className="App-header">
-         <h2> {game.name} </h2>
-         <h3> Summary </h3>
-         <p> {game.summary} </p>
-       </div>
-     </div>
-   );
- }
 }
 
 export default Main;

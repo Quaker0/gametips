@@ -1,7 +1,7 @@
 {
   "name": "gametips",
   "version": "1.0.0",
-  "description": "A dynamic website for game tips",
+  "description": "A dynamic website egnine for game tips",
   "main": "app.js",
   "dependencies": {
     "express": "4.16.4",
