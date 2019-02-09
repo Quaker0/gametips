@@ -1,8 +1,3 @@
-.App {
-  text-align: left;
-  margin: 50;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -19,13 +14,26 @@
   color: white;
 }
 
-a {
+h2.game-name {
+  margin-bottom: 15px;
+}
+
+.table-condensed th {
+  font-size: 1.25rem;
+}
+
+.table-condensed td {
+  font-size: 1rem;
+}
+
+a.main-link {
   color:inherit;
   text-decoration: none;
+  color: #61dafb;
  }
 
-a:hover {
-   color: #61dafb;
+a.main-link:hover {
+  color: #61dafb;
  }
 
 p {
@@ -47,16 +55,12 @@ p {
     font-weight: bold;
 }
 
-.side {
-  width: 20%;
-  float: left;
+.left {
+  padding-left: 0;
 }
-
-.container {
-  width: 60%;
-  float: left;
+.right {
+  padding-right: 0;
 }
-
 .inner-container {
   width: 80%;
   float: center;
@@ -66,15 +70,18 @@ p {
   text-align: center;
 }
 
+
+
 .hexagon {
   float: right;
   text-align: center;
-  position: relative;
+  position: absolute;
   width: 60px;
   height: 34.642px;
   background-color: #64C7CC;
-  margin: 30px auto;
-  right: 100px;
+  right: 20px;
+  top: 20px;
+
 }
 .hexagon:before,
 .hexagon:after {

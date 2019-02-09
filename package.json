@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node src/app.js"
+    "start": "source app-env && node src/app.js"
   },
   "author": "Niclas Bångman",
   "license": "ISC"

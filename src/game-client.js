@@ -9,15 +9,39 @@ const authorizedRequest = request.defaults({
   }
 })
 
+exports.getGenres = function(ids) {
+  const req = {
+    uri: `${baseUri}/genres`,
+    form: `fields name,slug; where id={${ids}};`
+  };
+  return new Promise(prepareRequest(req));
+}
 
-exports.getGame = function(id) {
+exports.getFranchise = function(id) {
+  const req = {
+    uri: `${baseUri}/franchises`,
+    form: `fields name,slug; where id=${id};`
+  };
+  return new Promise(prepareRequest(req));
+}
+
+exports.getPlatform = function(id) {
+  const req = {
+    uri: `${baseUri}/platforms`,
+    form: `fields name,slug,category; where id=${id};`
+  };
+  return new Promise(prepareRequest(req));
+}
+
+exports.getGame = function(gameId) {
   const fields = [
-    'id', 'name', 'summary', 'total_rating'
+    'id', 'name', 'summary', 'total_rating', 'cover', 'expansions', 'dlcs',
+    'franchise', 'platforms', 'first_release_date'
     // 'platforms', 'first_release_date', 'franchise'
   ];
   const req = {
     uri: `${baseUri}/games`,
-    form: `fields ${fields.join(',')}; where id = ${id};`
+    form: `fields ${fields.join(',')}; where id = ${gameId};`
   };
   return new Promise(prepareRequest(req));
 }
@@ -43,10 +67,10 @@ function prepareRequest(req) {
         resolve(JSON.parse(body));
       } else {
         if (httpResponse.statusCode === 401) {
-            reject(new Error('Auth failed'));
+            reject('Auth failed');
         }
-        var error = JSON.parse(body).result[0]
-        reject(new Error(error.title + ': ' + error.cause));
+        var error = err || error && JSON.parse(body).result[0].title || httpResponse.statusMessage;
+        reject(error);
       }
     })
   };
