@@ -2,6 +2,10 @@ const request = require('request')
 var exports = module.exports = {};
 const baseUri = 'https://api-v3.igdb.com'
 
+if (!process.env.USER_KEY) {
+  throw new Error('Missing environment variable');
+}
+
 const authorizedRequest = request.defaults({
   'headers': {
     'user-key': process.env.USER_KEY,

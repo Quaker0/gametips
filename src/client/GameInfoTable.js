@@ -18,7 +18,9 @@ export default class GameInfoTable extends Component {
 }
 
 class ExpansionRow extends Component {
-  state = { game: {} };
+  constructor() {
+      state = { game: {} };
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props && this.props.expansions && this.props !== prevProps) {
@@ -46,7 +48,9 @@ class ExpansionRow extends Component {
  }
 
 class GameGenreRow extends Component {
-  state = { genres: {} };
+  constructor() {
+    state = { genres: {} };
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props && this.props.genres && this.props !== prevProps) {
@@ -75,7 +79,9 @@ class GameGenreRow extends Component {
  }
 
  class FranchiseRow extends Component {
-   state = { franchise: {} };
+   constructor() {
+     state = { franchise: {} };
+   }
 
    componentDidUpdate(prevProps) {
      if (this.props && this.props.franchise && this.props !== prevProps) {

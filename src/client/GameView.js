@@ -6,8 +6,8 @@ import './App.css';
 export default class MainGame extends Component {
   constructor(props) {
     super(props)
-    this.gameId = this.props.match.params.id;
-    this.state = { game: {} };
+    gameId = this.props.match.params.id;
+    state = { game: {} };
   }
 
   componentDidMount() {

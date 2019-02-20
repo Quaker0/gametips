@@ -2,8 +2,9 @@ const express = require('express')
 const app = express()
 const gameClient = require('./game-client.js')
 const helmet = require('helmet');
-const port = 3001
+const port = 8080
 
+app.use(express.static('dist'));
 app.use(helmet());
 app.use(express.json());
 
