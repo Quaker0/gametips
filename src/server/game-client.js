@@ -1,4 +1,4 @@
-const request = require('request')
+const request = require('request');
 var exports = module.exports = {};
 const baseUri = 'https://api-v3.igdb.com'
 
