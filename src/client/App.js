@@ -28,7 +28,6 @@ const PageNotFound = () => (
   <div className='App'>
     <header className='App-header'>
       <h2>Could not find the page you are looking for...</h2>
-      <Link to='/'>Return home</Link>
     </header>
   </div>
 );
@@ -57,7 +56,6 @@ class Home extends Component {
 
   render() {
     const { popularGames } = this.state;
-    console.log(popularGames)
     return (
       <div className='App'>
         <div className='App-header'>

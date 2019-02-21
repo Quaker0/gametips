@@ -16,7 +16,7 @@ const Head = () => (
     <SiteScripts/>
     <nav className='navbar fixed-top navbar-dark bg-dark justify-content-between'>
       <Link to='/' className='main-nav-link'>
-        <img className='app-logo navbar-brand' src='public/favicon-32x32.png'/>
+        <img className='app-logo navbar-brand'/>
         Game Tips
       </Link>
     </nav>
