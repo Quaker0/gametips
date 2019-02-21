@@ -3,6 +3,9 @@
   "version": "1.1.0",
   "description": "A dynamic website engine for game tips",
   "main": "src/server/index.js",
+  "engines": {
+    "node": "8.x"
+  },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "express": "^4.16.4",

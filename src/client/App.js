@@ -1,28 +1,41 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import MainGame from './GameView.js';
 import Head from './Head.js';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
-  browserHistory,
-  Switch
-} from "react-router-dom";
+  Switch,
+  Link
+} from 'react-router-dom';
 
 const Main = () => (
   <Router>
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/game/:id" component={MainGame} />
-      <Route path="/about" component={About} />
-    </Switch>
+    <div>
+      <Route component={Head} />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route path='/game/:id' component={MainGame} />
+        <Route path='/about' component={About} />
+        <Route path='*' component={PageNotFound} />
+      </Switch>
+      <Route component={Footer} />
+    </div>
   </Router>
 );
 
+const PageNotFound = () => (
+  <div className='App'>
+    <header className='App-header'>
+      <h2>Could not find the page you are looking for...</h2>
+      <Link to='/'>Return home</Link>
+    </header>
+  </div>
+);
+
 const About = () => (
-  <div className="App">
-  <Head/>
-    <header className="App-header">
+  <div className='App'>
+    <header className='App-header'>
       <h2>Made by Niclas Bångman</h2>
     </header>
   </div>
@@ -46,16 +59,15 @@ class Home extends Component {
     const { popularGames } = this.state;
     console.log(popularGames)
     return (
-      <div className="App">
-        <Head/>
-        <div className="App-header">
+      <div className='App'>
+        <div className='App-header'>
         <h2> Top 10 Most Popular Games </h2>
           <ul>
             {
               Array.isArray(popularGames) ? (
-                popularGames.map((game, i) => <li key={i} ><a className="main-link" href={'/game/' + game.id}>{game.name}</a></li>)
+                popularGames.map((game, i) => <li key={i} ><a className='main-link' href={'/#/game/' + game.id}>{game.name}</a></li>)
               ) : (
-                <div className="alert alert-danger"><strong>{popularGames.error}</strong></div>
+                <div className='alert alert-danger'><strong>{popularGames.error}</strong></div>
               )
 
             }
@@ -65,5 +77,15 @@ class Home extends Component {
     );
   }
 }
+
+const Footer = () => (
+  <nav className='navbar fixed-bottom navbar-dark bg-dark justify-content-between'>
+    <form className="form-inline">
+      <Link to='/about' className='btn btn-sm btn-outline-secondary'>
+        About
+      </Link>
+    </form>
+  </nav>
+);
 
 export default Main;
