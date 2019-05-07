@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
-import MainGame from './GameView.js';
+import GameView from './GameView.js';
 import Head from './Head.js';
+import MostPopular from './MostPopular.js';
+
 import {
   HashRouter as Router,
   Route,
@@ -14,8 +16,8 @@ const Main = () => (
     <div>
       <Route component={Head} />
       <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/game/:id' component={MainGame} />
+        <Route exact path='/' component={MostPopular} />
+        <Route path='/game/:id' component={GameView} />
         <Route path='/about' component={About} />
         <Route path='*' component={PageNotFound} />
       </Switch>
@@ -39,42 +41,6 @@ const About = () => (
     </header>
   </div>
 );
-
-class Home extends Component {
-  constructor(props) {
-   super(props);
-   this.state = { popularGames: [] };
- }
-
-  componentDidMount() {
-    if (!Object.keys(this.state.popularGames).length) {
-      fetch('/api/v1/popularGames')
-       .then(res => res.json())
-       .then(games => this.setState({ popularGames: games }));
-   }
- }
-
-  render() {
-    const { popularGames } = this.state;
-    return (
-      <div className='App'>
-        <div className='App-header'>
-        <h2> Top 10 Most Popular Games </h2>
-          <ul>
-            {
-              Array.isArray(popularGames) ? (
-                popularGames.map((game, i) => <li key={i} ><a className='main-link' href={'/#/game/' + game.id}>{game.name}</a></li>)
-              ) : (
-                <div className='alert alert-danger'><strong>{popularGames.error}</strong></div>
-              )
-
-            }
-          </ul>
-        </div>
-      </div>
-    );
-  }
-}
 
 const Footer = () => (
   <nav className='navbar fixed-bottom navbar-dark bg-dark justify-content-between'>

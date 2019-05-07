@@ -24,6 +24,7 @@ app.get('/api/v1/getGame/:id', function (req, res) {
   console.log(`Game with ID ${req.params.id} requested`)
   var gamePromise = gameClient.getGame(req.params.id);
   gamePromise.then(function(result) {
+    console.log('Game', result[0])
     res.send(result[0] || {});
   }, function(err) {
     console.log('error: ', err);
@@ -43,7 +44,7 @@ app.get('/api/v1/getFranchise/:id', function (req, res) {
 })
 
 
-app.get('/api/v1/getPlatform/:id', function (req, res) {
+app.get('/api/v1/getPlatforms/:id', function (req, res) {
   console.log(`Platform with ID ${req.params.id} requested`)
   var gamePromise = gameClient.getPlatform(req.params.id);
   gamePromise.then(function(result) {
@@ -54,9 +55,9 @@ app.get('/api/v1/getPlatform/:id', function (req, res) {
   })
 })
 
-app.get('/api/v1/getGenres/:ids', function (req, res) {
-  console.log(`Platform with ID ${req.params.ids} requested`)
-  var gamePromise = gameClient.getGenres(req.params.ids);
+app.get('/api/v1/getGenres/:id', function (req, res) {
+  console.log(`Platform with ID ${req.params.id} requested`)
+  var gamePromise = gameClient.getGenre(req.params.id);
   gamePromise.then(function(result) {
     res.send(result[0] || {});
   }, function(err) {
