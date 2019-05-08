@@ -9,7 +9,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(14px + .5vw) !important;
+  font-size: calc(12px + .5vw) !important;
   color: white;
 }
 
@@ -49,7 +49,7 @@ p {
   display: inline-table;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 0.5vw);
+  font-size: calc(8px + 0.5vw);
   color: #e8edef;
 }
 

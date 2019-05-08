@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
-import GameView from './GameView.js';
 import Head from './Head.js';
 import MostPopular from './MostPopular.js';
+import GameProvider from './GameProvider.js';
+import {GameConsumer} from './GameConsumer.js';
+
 
 import {
   HashRouter as Router,
@@ -24,6 +26,12 @@ const Main = () => (
       <Route component={Footer} />
     </div>
   </Router>
+);
+
+const GameView = props => (
+    <GameProvider gameId={props.match.params.id}>
+      <GameConsumer />
+    </GameProvider>
 );
 
 const PageNotFound = () => (
