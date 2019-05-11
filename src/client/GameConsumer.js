@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
 import {GameContext} from './GameProvider.js'
+import Container from 'reactstrap/lib/Container';
+import Table from 'reactstrap/lib/Table';
+import Row from 'reactstrap/lib/Row';
+import Col from 'reactstrap/lib/Col';
 
 export class GameConsumer extends Component {
   render() {
     return (
       <div className='App-header'>
-        <div className='container-fluid'>
-          <div className='row'>
-            <div className='col-4 left'></div>
-            <div className='col-4'></div>
-            <div className='col-4 right' style={{float: 'left'}}></div>
-          </div>
-          <div className='row'>
-            <div className='col-sm-12 col-md-3 left'>
+        <Container fluid>
+          <Row>
+            <Col xs='4'></Col>
+            <Col xs='4'></Col>
+            <Col xs='4'></Col>
+            <Col xs='4'></Col>
+            <Col xs='4' style={{float: 'left'}}></Col>
+          </Row>
+          <Row>
+            <Col sm='12' md='3'>
               <GameInfoTable />
-            </div>
-            <div className='col-sm-12 col-md-6 article-box'>
+            </Col>
+            <Col sm='12' md='6' className='article-box'>
               <Game />
-            </div>
-            <div className='col-sm-12 col-md-3 right'>
-            </div>
-          </div>
-        </div>
+            </Col>
+            <Col sm='12' md='3'></Col>
+          </Row>
+        </Container>
       </div>
     );
   }
@@ -32,19 +37,17 @@ class Game extends Component {
    return (
      <GameContext.Consumer>
      {game => (
-       <div>
          <div className='article'>
-            <div className='container-fluid'>
-              <div className='row'>
-                <div className='col-2'></div>
-                <div className='col-8'><h3 className='game-name'> {game.name} </h3></div>
-                <div className='col-2'><RatingComponent rating={game.total_rating}/></div>
-              </div>
-            </div>
+            <Container fluid>
+              <Row>
+                <Col xs='2'></Col>
+                <Col xs='8'><h3 className='game-name'> {game.name} </h3></Col>
+                <Col xs='2'><RatingComponent rating={game.total_rating}/></Col>
+              </Row>
+            </Container>
             <h5> Summary </h5>
             <p> {game.summary} </p>
           </div>
-        </div>
       )}
     </GameContext.Consumer>
     );
@@ -66,17 +69,15 @@ const RatingComponent = (props) => {
 class GameInfoTable extends Component {
   render() {
     return (
-        <div className='table-responsive'>
-          <table className='table table-sm table-striped table-condensed'>
-            <tbody>
-              <FranchiseRow/>
-              <GameGenreRow/>
-              <ExpansionRow/>
-              <ReleasedRow/>
-              <PlatformRow/>
-            </tbody>
-          </table>
-        </div>
+        <Table responsive dark size='sm' className='info-table table-condensed'>
+          <tbody>
+            <FranchiseRow/>
+            <GameGenreRow/>
+            <ExpansionRow/>
+            <ReleasedRow/>
+            <PlatformRow/>
+          </tbody>
+        </Table>
     );
   }
 }
@@ -112,7 +113,7 @@ class ExpansionRow extends Component {
      if (!this.state.game.name) {
        return null;
      }
-     return toRowEntry(Expansion, this.state.game.name);
+     return toRowEntry('Expansion', this.state.game.name);
    }
  }
  ExpansionRow.contextType = GameContext;

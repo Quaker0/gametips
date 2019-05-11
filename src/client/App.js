@@ -4,14 +4,13 @@ import Head from './Head.js';
 import MostPopular from './MostPopular.js';
 import GameProvider from './GameProvider.js';
 import {GameConsumer} from './GameConsumer.js';
-
-
 import {
   HashRouter as Router,
   Route,
   Switch,
   Link
 } from 'react-router-dom';
+import Navbar from 'reactstrap/lib/Navbar';
 
 const Main = () => (
   <Router>
@@ -51,13 +50,13 @@ const About = () => (
 );
 
 const Footer = () => (
-  <nav className='navbar fixed-bottom navbar-dark bg-dark justify-content-between'>
+  <Navbar dark className='bg-dark justify-content-between'>
     <form className="form-inline">
       <Link to='/about' className='btn btn-sm btn-outline-secondary'>
         About
       </Link>
     </form>
-  </nav>
+  </Navbar>
 );
 
 export default Main;

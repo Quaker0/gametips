@@ -24,11 +24,11 @@ navbar {
   min-width: 500px;
 }
 
-.table-condensed th {
+.info-table th {
   font-size: calc(7px + .5vw);
 }
 
-.table-condensed td {
+.info-table td {
   font-size: calc(5px + .5vw);
 }
 
