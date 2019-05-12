@@ -1,9 +1,11 @@
 const express = require('express')
 const app = express()
+const compression = require('compression');
 const gameClient = require('./game-client.js')
 const helmet = require('helmet');
 const port = process.env.PORT || 8080;
 
+app.use(compression());
 app.use(express.static('dist'));
 app.use(helmet());
 app.use(express.json());
