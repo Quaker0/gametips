@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import Head from './Head.js';
-import MostPopular from './MostPopular.js';
-import GameProvider from './GameProvider.js';
-import {GameConsumer} from './GameConsumer.js';
+import Head from './Head';
+import MostPopular from './MostPopular';
+import GameProvider from './GameProvider';
+import { GameConsumer } from './GameConsumer';
 import {
   HashRouter as Router,
   Route,

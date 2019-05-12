@@ -65,5 +65,13 @@ module.exports = {
         }
       }
     }
-  }
+  },
 };
+
+const config = { // Internet Explorer support
+  entry: [
+    "core-js/modules/es6.promise",
+    "core-js/modules/es6.array.iterator",
+    path.resolve(__dirname, "src/main.js"),
+  ]
+}
