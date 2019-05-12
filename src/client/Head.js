@@ -13,10 +13,6 @@ const Head = () => (
       rel='stylesheet'
       href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
     />
-    <link
-      rel='stylesheet'
-      href='https://fonts.googleapis.com/icon?family=Material+Icons'
-    />
     <Navbar dark className='fixed-top bg-dark justify-content-between'>
       <Link to='/' className='btn btn-sm btn-outline-primary'>Game Tips</Link>
     </Navbar>

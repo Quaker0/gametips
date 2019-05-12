@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { GameContext } from './GameProvider.js'
-import Table from 'reactstrap/lib/Table';
+import { InfoTable } from './StyleTemplate';
 
 export default class GameInfoTable extends Component {
   render() {
     return (
-        <Table responsive dark size='sm' className='info-table table-condensed'>
+        <InfoTable responsive dark size='sm'>
           <tbody>
             <FranchiseRow/>
             <GameGenreRow/>
@@ -13,7 +13,7 @@ export default class GameInfoTable extends Component {
             <ReleasedRow/>
             <PlatformRow/>
           </tbody>
-        </Table>
+        </InfoTable>
     );
   }
 }

@@ -5,6 +5,7 @@ import Col from 'reactstrap/lib/Col';
 import Spinner from 'reactstrap/lib/Spinner';
 import Loadable from 'react-loadable';
 import Game from './Game';
+import { AppBox } from './StyleTemplate';
 
 const CenteredSpinner = () => (
   <div className='d-flex justify-content-center align-items-center'>
@@ -26,26 +27,19 @@ const LoadableGameInfoTable = Loadable({
 export class GameConsumer extends Component {
   render() {
     return (
-      <div className='App-header'>
+      <AppBox>
         <Container fluid>
-          <Row>
-            <Col xs='4'></Col>
-            <Col xs='4'></Col>
-            <Col xs='4'></Col>
-            <Col xs='4'></Col>
-            <Col xs='4' style={{float: 'left'}}></Col>
-          </Row>
           <Row>
             <Col sm='12' md='3'>
               <LoadableGameInfoTable />
             </Col>
-            <Col sm='12' md='6' className='article-box'>
+            <Col sm='12' md='6'>
               <Game />
             </Col>
             <Col sm='12' md='3'></Col>
           </Row>
         </Container>
-      </div>
+      </AppBox>
     );
   }
 }

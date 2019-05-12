@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { MainLink, AppBox } from './StyleTemplate'
 
 export default class MostPopular extends Component {
   constructor(props) {
@@ -20,18 +21,25 @@ export default class MostPopular extends Component {
       <div className='App'>
       {
         Array.isArray(popularGames) ? (
-          <div className='App-header'>
+          <AppBox>
           <h2> Top 10 Most Popular Games </h2>
             <ul>
               {
                 popularGames.map(
-                  (game, i) => <li key={i} ><a className='main-link' href={'/#/game/' + game.id}>{game.name}</a></li>
+                  game => (
+                    <li key={game.id} >
+                      <MainLink href={'/#/game/' + game.id}>
+                        {game.name}
+                      </MainLink>
+                    </li>)
                 )
               }
             </ul>
-          </div>
+          </AppBox>
         ) : (
-          <div className='alert alert-danger'><strong>{popularGames.error}</strong></div>
+          <div className='alert alert-danger'>
+            <strong>{popularGames.error}</strong>
+          </div>
         )
       }
       </div>

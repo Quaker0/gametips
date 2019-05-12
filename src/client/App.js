@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
 import Head from './Head';
 import MostPopular from './MostPopular';
 import GameProvider from './GameProvider';
 import { GameConsumer } from './GameConsumer';
+import { AppBox } from './StyleTemplate';
 import {
   HashRouter as Router,
   Route,
@@ -14,7 +14,7 @@ import Navbar from 'reactstrap/lib/Navbar';
 
 const Main = () => (
   <Router>
-    <div>
+    <>
       <Route component={Head} />
       <Switch>
         <Route exact path='/' component={MostPopular} />
@@ -23,7 +23,7 @@ const Main = () => (
         <Route path='*' component={PageNotFound} />
       </Switch>
       <Route component={Footer} />
-    </div>
+    </>
   </Router>
 );
 
@@ -34,28 +34,22 @@ const GameView = props => (
 );
 
 const PageNotFound = () => (
-  <div className='App'>
-    <header className='App-header'>
-      <h2>Could not find the page you are looking for...</h2>
-    </header>
-  </div>
+  <AppBox>
+    <h2>Could not find the page you are looking for...</h2>
+  </AppBox>
 );
 
 const About = () => (
-  <div className='App'>
-    <header className='App-header'>
-      <h2>Made by Niclas Bångman</h2>
-    </header>
-  </div>
+  <AppBox>
+    <h2>Made by Niclas Bångman</h2>
+  </AppBox>
 );
 
 const Footer = () => (
   <Navbar dark className='bg-dark justify-content-between'>
-    <form className="form-inline">
-      <Link to='/about' className='btn btn-sm btn-outline-secondary'>
-        About
-      </Link>
-    </form>
+    <Link to='/about' className='btn btn-sm btn-outline-secondary'>
+      About
+    </Link>
   </Navbar>
 );
 
