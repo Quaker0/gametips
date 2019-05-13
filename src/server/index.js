@@ -32,9 +32,22 @@ var cache = (hours) => {
 }
 
 app.get('/api/v1/popularGames', cache(1), function (req, res) {
+  console.log('Popular games requested')
   var gamesPromise = gameClient.listGames();
   gamesPromise.then(function(result) {
     res.send(result);
+  }, function(err) {
+    console.log('error: ', err);
+    res.send({error: err});
+  })
+})
+
+app.get('/api/v1/getCover/:id', cache(24), function (req, res) {
+  console.log(`Cover with ID ${req.params.id} requested`)
+  var gamesPromise = gameClient.getCover(req.params.id);
+  gamesPromise.then(function(result) {
+    console.log('Cover', result[0])
+    res.send(result[0] || {});
   }, function(err) {
     console.log('error: ', err);
     res.send({error: err});

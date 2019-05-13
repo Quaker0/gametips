@@ -21,6 +21,14 @@ exports.getGenre = function(id) {
   return new Promise(prepareRequest(req));
 }
 
+exports.getCover = function(id) {
+  const req = {
+    uri: `${baseUri}/covers`,
+    form: `fields url,width,height; where id = ${id};`
+  };
+  return new Promise(prepareRequest(req));
+}
+
 exports.getFranchise = function(id) {
   const req = {
     uri: `${baseUri}/franchises`,

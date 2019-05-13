@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { GameContext } from './GameProvider.js'
+import { CenteredSpinner } from './utils.js'
 import Container from 'reactstrap/lib/Container';
 import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
+import Loadable from 'react-loadable';
 import {
   Article,
   ArticleText,
@@ -19,9 +21,15 @@ export default class Game extends Component {
      {game => (
          <Article>
             <Row>
-              <Col xs='2'></Col>
-              <Col xs='8'><h3> {game.name} </h3></Col>
-              <Col xs='2'><RatingComponent rating={game.total_rating}/></Col>
+              <Col xs='3'>
+                <Cover coverId={game.cover}/>
+              </Col>
+              <Col xs='6'>
+                <h3> {game.name} </h3>
+              </Col>
+              <Col xs='3'>
+                <RatingComponent rating={game.total_rating}/>
+              </Col>
             </Row>
             <h5> {game.summary && 'Summary'} </h5>
             <ArticleText> {game.summary} </ArticleText>
@@ -31,6 +39,33 @@ export default class Game extends Component {
     );
   }
  }
+
+class Cover extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { cover: {} };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props && this.props.coverId && this.props !== prevProps) {
+      fetch(`/api/v1/getCover/${this.props.coverId}`)
+        .then(res => res.json())
+        .then(data => {
+         if (data.error) {
+            throw new Error(data.error);
+          }
+         this.setState({ cover: data});
+       });
+     }
+   }
+
+ render() {
+   if (!this.state.cover.url) {
+     return <CenteredSpinner/>;
+   }
+   return <img className='img-fluid rounded float-right' src={'https://cors-anywhere.herokuapp.com/https:' + this.state.cover.url} crossOrigin='anonymous' height='50' width={50 * this.state.cover.height/this.state.cover.width}/>;
+ }
+}
 
 const RatingComponent = (props) => {
   return (
