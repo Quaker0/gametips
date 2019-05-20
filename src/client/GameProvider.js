@@ -5,22 +5,30 @@ export const GameContext = React.createContext();
 export default class GameProvider extends Component {
   constructor(props) {
     super(props)
-    this.gameId = this.props.gameId;
-    this.state = { game: {} };
+    this.state = { game: {}, steam: {}, id: this.props.gameId};
   }
 
   componentDidMount() {
     if (!Object.keys(this.state.game).length) {
-      fetch('/api/v1/getGame/' + this.gameId)
+      fetch('/api/v1/getGame/' + this.state.id)
+      .then(res => res.json())
+      .then(gameItem => {
+        fetch('/api/v1/getSteamGame/', {
+          method: 'POST',
+          body: JSON.stringify({'name': gameItem.name}),
+          headers: new Headers({'content-type': 'application/json'})
+        })
         .then(res => res.json())
-        .then(gameItem => {
-          this.setState({ game: gameItem })
-       });
+        .then(steamGame => {
+            this.setState({game: gameItem, steam: steamGame});
+        });
+      });
     }
   }
+
   render() {
     return (
-      <GameContext.Provider value={this.state.game}>
+      <GameContext.Provider value={this.state}>
         {this.props.children}
       </GameContext.Provider>
     )

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 export const InfoTable = styled(Table)`
   th {
-    font-size: calc(7px + .5vw);
+    font-size: calc(5px + .5vw);
+    vertical-align: middle !important;
   }
   td {
     vertical-align: middle !important;

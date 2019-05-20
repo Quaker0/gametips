@@ -18,21 +18,21 @@ export default class Game extends Component {
  render() {
    return (
      <GameContext.Consumer>
-     {game => (
+     {ctx => (
          <Article>
             <Row>
               <Col xs='3'>
-                <Cover coverId={game.cover}/>
+                <Cover coverId={ctx.game.cover}/>
               </Col>
               <Col xs='6'>
-                <h3> {game.name} </h3>
+                <h3> {ctx.game.name} </h3>
               </Col>
               <Col xs='3'>
-                <RatingComponent rating={game.total_rating}/>
+                <RatingComponent rating={ctx.game.total_rating}/>
               </Col>
             </Row>
-            <h5> {game.summary && 'Summary'} </h5>
-            <ArticleText> {game.summary} </ArticleText>
+            <h5> {ctx.game.summary && 'Summary'} </h5>
+            <ArticleText> {ctx.game.summary} </ArticleText>
           </Article>
       )}
     </GameContext.Consumer>
