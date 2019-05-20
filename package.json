@@ -19,7 +19,10 @@
     "css-loader": "^2.1.0",
     "express": "^4.16.4",
     "helmet": "^3.15.0",
+    "jquery": "3.4.1",
+    "lodash": "4.17.11",
     "memory-cache": "0.2.0",
+    "npm": "6.9.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-loadable": "5.5.0",
@@ -51,5 +54,9 @@
     "heroku-postbuild": "webpack -p"
   },
   "author": "Niclas Bångman",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Quaker0/gametips.git"
+  }
 }

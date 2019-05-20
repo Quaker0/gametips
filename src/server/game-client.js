@@ -18,7 +18,7 @@ exports.getGenre = function(id) {
     uri: `${baseUri}/genres`,
     form: `fields name,slug; where id = ${id};`
   };
-  return new Promise(prepareRequest(req));
+  return new Promise(prepareRequest(req)).then(res => res[0]);
 }
 
 exports.getCover = function(id) {
@@ -26,7 +26,7 @@ exports.getCover = function(id) {
     uri: `${baseUri}/covers`,
     form: `fields url,width,height; where id = ${id};`
   };
-  return new Promise(prepareRequest(req));
+  return new Promise(prepareRequest(req)).then(res => res[0]);
 }
 
 exports.getFranchise = function(id) {
@@ -34,7 +34,7 @@ exports.getFranchise = function(id) {
     uri: `${baseUri}/franchises`,
     form: `fields name,slug; where id = ${id};`
   };
-  return new Promise(prepareRequest(req));
+  return new Promise(prepareRequest(req)).then(res => res[0]);
 }
 
 exports.getPlatform = function(id) {
@@ -42,19 +42,21 @@ exports.getPlatform = function(id) {
     uri: `${baseUri}/platforms`,
     form: `fields name,slug,category; where id = ${id};`
   };
-  return new Promise(prepareRequest(req));
+  return new Promise(prepareRequest(req)).then(res => res[0]);
 }
 
 exports.getGame = function(gameId) {
   const fields = [
     'id', 'name', 'summary', 'total_rating', 'cover', 'expansions', 'dlcs',
-    'franchise', 'platforms', 'first_release_date'
+    'franchise', 'platforms', 'first_release_date', 'external_games',
+    'age_ratings', 'game_engines', 'game_modes', 'genres', 'involved_companies',
+    'aggregated_rating', 'similar_games'
   ];
   const req = {
     uri: `${baseUri}/games`,
     form: `fields ${fields.join(',')}; where id = ${gameId};`
   };
-  return new Promise(prepareRequest(req));
+  return new Promise(prepareRequest(req)).then(res => res[0]);
 }
 
 exports.listGames = function() {
