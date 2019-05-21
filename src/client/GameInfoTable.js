@@ -136,19 +136,18 @@ componentDidUpdate() {
     fetch(`/api/v1/getGenres/${this.context.game.genres.join(',')}`)
       .then(res => res.json())
       .then(data => {
-       if (data.error) {
-          throw new Error(data.error);
+       if (!data.error) {
+          this.setState({ genres: data});
         }
-       this.setState({ genres: data});
      });
    }
  }
 
  render() {
-   if (!this.state.genres.name) {
+   if (!this.state.genres.length) {
      return null;
    }
-   return toRowEntry('Genre', this.state.genres.name);
+   return toRowEntry('Genres', this.state.genres.map(x => x.name).join(', '));
  }
 }
 GameGenreRow.contextType = GameContext;

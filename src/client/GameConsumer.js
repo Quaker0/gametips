@@ -5,6 +5,7 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import Loadable from 'react-loadable';
 import Game from './Game';
+import SimilarGames from './SimilarGames';
 import { AppBox } from './StyleTemplate';
 
 const LoadableGameInfoTable = Loadable({
@@ -32,6 +33,7 @@ export class GameConsumer extends Component {
             </Col>
             <Col sm='12' md='3'></Col>
           </Row>
+          <SimilarGames />
         </Container>
       </AppBox>
     );

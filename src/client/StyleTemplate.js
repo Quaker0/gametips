@@ -30,6 +30,7 @@ export const AppBox = styled.div`
   justify-content: center;
   font-size: calc(12px + .5vw) !important;
   color: white;
+  padding-top: 100px;
 `;
 
 export const Article = styled.div`
@@ -71,4 +72,24 @@ export const RatingScore = styled.span`
 export const RatingMax = styled.span`
   color: #212529;
   font-size: 1rem;
+`;
+
+export const Testamonial = styled.div`
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  margin-right: -15px;
+  margin-left: -15px;
+`;
+
+export const Display = styled.div`
+  margin-top: 100px;
+  margin-bottom: 50px;
+`;
+
+export const TestamonialItem = styled.div`
+  display: inline-block;
+  float: none;
 `;

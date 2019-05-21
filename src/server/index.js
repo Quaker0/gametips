@@ -7,7 +7,6 @@ const steamClient = require('./steam-client.js');
 const helmet = require('helmet');
 const port = process.env.PORT || 8080;
 
-// app.use(compression());
 app.use(express.json());
 app.use(express.static('dist'));
 app.use(helmet());
@@ -50,7 +49,6 @@ app.get('/api/v1/getCover/:id', cache(24), function (req, res) {
 
   var gamesPromise = gameClient.getCover(req.params.id);
   gamesPromise.then(function(result) {
-    console.log('Cover', result[0])
     res.send(result || {});
   }, function(err) {
     console.log('error: ', err);
@@ -66,7 +64,6 @@ app.get('/api/v1/getGame/:id', cache(12), function (req, res) {
 
   var gamePromise = gameClient.getGame(req.params.id);
   gamePromise.then(function(result) {
-    console.log('Game', result)
     res.send(result || {});
   }, function(err) {
     console.log('error: ', err);
@@ -104,13 +101,13 @@ app.get('/api/v1/getPlatforms/:id', cache(24), function (req, res) {
   })
 })
 
-app.get('/api/v1/getGenres/:id', cache(24), function (req, res) {
-  console.log(`Genre with ID ${req.params.id} requested`)
-  if (!req.params.id) {
-    res.status(400).send({'error': '"id" missing from url param'});
+app.get('/api/v1/getGenres/:ids', cache(24), function (req, res) {
+  console.log(`Genre with IDs ${req.params.ids} requested`)
+  if (!req.params.ids) {
+    res.status(400).send({'error': 'IDs missing from url param'});
   }
 
-  var gamePromise = gameClient.getGenre(req.params.id);
+  var gamePromise = gameClient.getGenre(req.params.ids);
   gamePromise.then(function(result) {
     res.send(result || {});
   }, function(err) {
@@ -127,8 +124,7 @@ app.post('/api/v1/getSteamGame', cache(24), function (req, res, next) {
 
   var gamePromise = steamClient.getGame(req.body.name);
   gamePromise.then(function(result) {
-    console.log('Game:', result)
-    res.send(result);
+    res.send(result || {});
   }, function(err) {
     console.log('Error:', err);
     res.status(500).send({error: err || 'Unknown error'});

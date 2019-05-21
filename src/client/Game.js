@@ -63,7 +63,7 @@ class Cover extends Component {
    if (!this.state.cover.url) {
      return <CenteredSpinner/>;
    }
-   return <img className='img-fluid rounded float-right' src={'https://cors-anywhere.herokuapp.com/https:' + this.state.cover.url} crossOrigin='anonymous' height='50' width={50 * this.state.cover.height/this.state.cover.width}/>;
+   return <img className='img-fluid rounded float-right' src={'https://cors-anywhere.herokuapp.com/https:' + this.state.cover.url} crossOrigin='anonymous' height='50' width='50'/>;
  }
 }
 

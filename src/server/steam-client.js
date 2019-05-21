@@ -32,7 +32,7 @@ exports.getGame = async function(name) {
     await loadDb();
   }
   const gameId = await module.db[name];
-  return getGameDetails(gameId);
+  return gameId && getGameDetails(gameId);
 }
 
 async function loadDb() {

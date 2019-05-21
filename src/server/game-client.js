@@ -13,12 +13,12 @@ const authorizedRequest = request.defaults({
   }
 })
 
-exports.getGenre = function(id) {
+exports.getGenre = function(ids) {
   const req = {
     uri: `${baseUri}/genres`,
-    form: `fields name,slug; where id = ${id};`
+    form: `fields name,slug; where id = ${ids.split(',').join('| id = ')};`
   };
-  return new Promise(prepareRequest(req)).then(res => res[0]);
+  return new Promise(prepareRequest(req));
 }
 
 exports.getCover = function(id) {
