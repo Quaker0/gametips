@@ -12,7 +12,7 @@ import Head from './Head';
 import MostPopular from './MostPopular';
 import GameProvider from './GameProvider';
 import GameConsumer from './GameConsumer';
-import { AppBox } from './StyleTemplate';
+import { AppBox } from '../styleTemplate';
 
 const GameView = ({ match }) => (
   <GameProvider gameId={parseInt(match.params.id, 10)}>

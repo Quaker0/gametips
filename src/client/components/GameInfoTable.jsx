@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react';
-import { InfoTable } from './StyleTemplate';
+import { InfoTable } from '../styleTemplate';
 
 import { GameContext } from './GameProvider';
 

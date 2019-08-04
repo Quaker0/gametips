@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import Row from 'reactstrap/lib/Row';
 import { PropTypes } from 'prop-types';
 
-import { Testamonial, TestamonialItem, Display } from './StyleTemplate';
-import CenteredSpinner from './utils';
+import { Testamonial, TestamonialItem, Display } from '../styleTemplate';
+import CenteredSpinner from './CenteredSpinner';
 import { GameContext } from './GameProvider';
 
 export default class SimilarGames extends PureComponent {

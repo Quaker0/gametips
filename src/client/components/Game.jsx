@@ -3,7 +3,7 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import PropTypes from 'prop-types';
 
-import CenteredSpinner from './utils';
+import CenteredSpinner from './CenteredSpinner';
 import { GameContext } from './GameProvider';
 import {
   Article,
@@ -12,7 +12,7 @@ import {
   RatingText,
   RatingScore,
   RatingMax,
-} from './StyleTemplate';
+} from '../styleTemplate';
 
 const Game = () => (
   <GameContext.Consumer>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MainLink, AppBox } from './StyleTemplate';
+import { MainLink, AppBox } from '../styleTemplate';
 
 export default class MostPopular extends Component {
   constructor(props) {

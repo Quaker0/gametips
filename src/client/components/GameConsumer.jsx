@@ -4,10 +4,10 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import Loadable from 'react-loadable';
 
-import CenteredSpinner from './utils';
+import CenteredSpinner from './CenteredSpinner';
 import Game from './Game';
 import SimilarGames from './SimilarGames';
-import { AppBox } from './StyleTemplate';
+import { AppBox } from '../styleTemplate';
 
 const LoadableGameInfoTable = Loadable({
   loader: () => import('./GameInfoTable'),
