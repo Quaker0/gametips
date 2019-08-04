@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from 'reactstrap/lib/Spinner';
 
-export class CenteredSpinner extends Component {
+export default class CenteredSpinner extends Component {
   constructor(props) {
     super(props);
     this.state = { display: false };
@@ -14,15 +14,16 @@ export class CenteredSpinner extends Component {
   }
 
   enableMessage() {
-    this.setState({display: true});
+    this.setState({ display: true });
   }
 
   render() {
-    if (!this.state.display) {
+    const { display } = this.state;
+    if (!display) {
       return null;
     }
     return (
-      <div className='d-flex justify-content-center align-items-center'>
+      <div className="d-flex justify-content-center align-items-center">
         <Spinner color="light" />
       </div>
     );

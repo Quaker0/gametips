@@ -1,10 +1,18 @@
 {
   "presets": [
-    "@babel/preset-env", "@babel/preset-react"
+    [
+      "@babel/preset-env", {
+        useBuiltIns: "entry",
+        corejs: 3,
+      }
+    ], "@babel/preset-react"
   ],
   "plugins": [
+    "dynamic-import-node",
     "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
     "transform-react-jsx-img-import",
+    "react-loadable/babel",
     ["transform-imports", {
      "reactstrap": {
        "transform": "reactstrap/lib/${member}",
