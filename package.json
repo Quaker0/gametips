@@ -59,8 +59,8 @@
   },
   "scripts": {
     "start": "node src/server/index.js",
-    "client": "env-cmd .bash-env webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "source .bash-env && nodemon --watch src/server -e js src/server/index.js",
+    "client": "env-cmd .env webpack-dev-server --mode development --devtool inline-source-map --hot",
+    "server": "env-cmd .env nodemon --watch src/server -e js src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-dev": "heroku local -e .env -p 3000",
     "heroku-postbuild": "webpack -p",
