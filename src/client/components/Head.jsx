@@ -13,7 +13,7 @@ const Head = () => (
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
     />
     <Navbar dark className="fixed-top bg-dark justify-content-between">
-      <Link to="/" className="btn btn-sm btn-outline-primary">Game Tips</Link>
+      <Link to="/" className="btn btn-sm btn-outline-primary">Most popular</Link>
     </Navbar>
   </>
 );

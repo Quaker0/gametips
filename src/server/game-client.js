@@ -22,7 +22,7 @@ function prepareRequest(req) {
         if (httpResponse.statusCode === 401) {
           reject('Auth failed');
         }
-        reject(err || JSON.parse(body).result[0].title || httpResponse.statusMessage);
+        reject(err || JSON.parse(body) || httpResponse.statusMessage);
       }
     });
   };

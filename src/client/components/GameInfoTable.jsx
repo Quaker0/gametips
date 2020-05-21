@@ -1,14 +1,16 @@
 import React, { Component, PureComponent } from 'react';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
 import { InfoTable } from '../styleTemplate';
-
 import { GameContext } from './GameProvider';
 
 export default class GameInfoTable extends PureComponent {
   render() {
+    const { game } = this.props;
     return (
       <InfoTable responsive dark size="sm">
         <tbody>
-          <FranchiseRow />
+          <FranchiseRow game={game} />
           <GameGenreRow />
           <ExpansionRow />
           <ReleasedRow />
@@ -31,68 +33,87 @@ function toRowEntry(header, row) {
 }
 
 class ExpansionRow extends Component {
-  isMounted = false;
-
   constructor(props) {
     super(props);
-    this.state = { expansion: {} };
-    this.resetState = () => {
-      if (this.isMounted) {
-        this.setState({ expansion: {} });
-      }
-    };
+    this.state = { expansions: {} };
+    this.resetState = () => this.setState({ expansions: {}, showExpansions: false });
+    this.toggle = this.toggle.bind(this);
   }
 
   componentDidMount() {
-    this.isMounted = true;
-  }
-
-  componentDidUpdate() {
     const { game } = this.context;
-    const { expansion } = this.state;
-    if (game && game.expansions && game.expansions.length && game.expansions[0] !== expansion.id) {
+    const { expansions } = this.state;
+
+    if (
+      game && game.expansions
+      && game.expansions.length
+      && game.expansions[0] !== _.get(expansions[0], 'id')
+    ) {
       fetch(`/api/v1/getGame/${game.expansions[0]}`)
         .then(res => res.json())
         .then((data) => {
           if (data.error) {
             throw new Error(data.error);
           }
-          if (this.isMounted) {
-            this.setState({ expansion: data });
-          }
+          this.setState({ expansions: [data] });
         });
-    } else if ((!game || !game.expansions || !game.expansions.length) && expansion.name) {
+    } else if ((!game || !game.expansions || !game.expansions.length) && expansions.length) {
       this.resetState();
     }
   }
 
-  componentWillUnmount() {
-    this.isMounted = false;
+  toggle() {
+    this.setState(state => ({
+      showExpansions: !state.showExpansions,
+    }));
   }
 
   render() {
-    const { expansion } = this.state;
-    if (!expansion || !expansion.name) {
+    const { expansions, showExpansions } = this.state;
+
+    if (!expansions || !expansions.length) {
       return null;
     }
-    return toRowEntry('Expansion', expansion.name);
+
+    const expansionRows = (
+      <tr>
+        <th />
+        <td>
+          {
+            expansions.map(expansion => (
+              <Link to={`/game/${expansion.id}`} id="expansions" key={`expansion-${expansion}`}>
+                {`- ${expansion.name}`}
+              </Link>
+            ))
+            }
+        </td>
+      </tr>
+    );
+
+    return (
+      <>
+        <tr onClick={this.toggle}>
+          <th>Expansions</th>
+          <td />
+        </tr>
+        {
+          showExpansions
+            ? expansionRows
+            : <></>
+        }
+      </>
+    );
   }
 }
 ExpansionRow.contextType = GameContext;
 
 class PlatformRow extends Component {
-  isMounted = false;
-
   constructor(props) {
     super(props);
     this.state = { platforms: [] };
   }
 
   componentDidMount() {
-    this.isMounted = true;
-  }
-
-  componentDidUpdate() {
     const { platforms } = this.context;
     if (platforms && !platforms.length) {
       const promises = [];
@@ -107,15 +128,9 @@ class PlatformRow extends Component {
           }));
       });
       Promise.all(promises).then((item) => {
-        if (this.isMounted) {
-          this.setState({ platforms: item });
-        }
+        this.setState({ platforms: item });
       });
     }
-  }
-
-  componentWillUnmount() {
-    this.isMounted = false;
   }
 
   render() {
@@ -168,33 +183,23 @@ class SteamDeveloperRow extends Component {
 SteamDeveloperRow.contextType = GameContext;
 
 class GameGenreRow extends Component {
-  isMounted = false;
-
   constructor(props) {
     super(props);
     this.state = { genres: {} };
   }
 
   componentDidMount() {
-    this.isMounted = true;
-  }
-
-  componentDidUpdate() {
     const { game } = this.context;
     const { genres } = this.state;
     if (game && game.genres && !Object.keys(genres).length) {
       fetch(`/api/v1/getGenres/${game.genres.join(',')}`)
         .then(res => res.json())
         .then((data) => {
-          if (!data.error && this.isMounted) {
+          if (!data.error) {
             this.setState({ genres: data });
           }
         });
     }
-  }
-
-  componentWillUnmount() {
-    this.isMounted = false;
   }
 
   render() {
@@ -208,43 +213,36 @@ class GameGenreRow extends Component {
 GameGenreRow.contextType = GameContext;
 
 class FranchiseRow extends Component {
-  isMounted = false;
-
   constructor(props) {
     super(props);
-    this.state = { franchise: {} };
-    this.resetState = () => {
-      if (this.isMounted) {
-        this.setState({ franchise: {} });
-      }
-    };
-  }
-
-  componentDidMount() {
-    this.isMounted = true;
-  }
-
-  componentDidUpdate() {
-    const { game } = this.context;
-    const { franchise } = this.state;
-    if (game && game.franchise && franchise.id !== game.franchise) {
-      fetch(`/api/v1/getFranchise/${game.franchise}`)
+    this.state = { franchise: null };
+    this.loadFranchise = function loadFranchise(franchise) {
+      fetch(`/api/v1/getFranchise/${franchise}`)
         .then(res => res.json())
         .then((data) => {
           if (data.error) {
             throw new Error(data.error);
           }
-          if (this.isMounted) {
-            this.setState({ franchise: data });
-          }
+          console.log(data);
+          return this.setState({ franchise: data });
         });
-    } else if ((!game || !game.franchise) && franchise.name) {
-      this.resetState();
+    };
+  }
+
+  componentDidMount() {
+    const { game } = this.props;
+    if (game && game.franchise) {
+      this.loadFranchise(game.franchise);
     }
   }
 
-  componentWillUnmount() {
-    this.isMounted = false;
+  shouldComponentUpdate(props, state) {
+    const { game } = props;
+    if (!state.franchise && props && game.franchise) {
+      this.loadFranchise(game.franchise);
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -255,4 +253,3 @@ class FranchiseRow extends Component {
     return toRowEntry('Franchise', franchise.name);
   }
 }
-FranchiseRow.contextType = GameContext;
